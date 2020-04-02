@@ -21,7 +21,7 @@ using Xamarin.Essentials;
 
 namespace Book_Crossing_Android.Activities
 {
-    [Activity(Label = "LoginActivity",MainLauncher = true)]
+    [Activity(Label = "LoginActivity",MainLauncher = false)]
     public class LoginActivity : Activity
     {
 
