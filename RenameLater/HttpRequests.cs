@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RenameLater.models;
+using RenameLater.models.response;
 
 namespace RenameLater
 {
@@ -17,7 +18,7 @@ namespace RenameLater
             HttpClient = new HttpClient();
         }
 
-        public async Task<string> GetToken(LoginModel loginModel)
+        public async Task<LoggedUser> GetToken(LoginModel loginModel)
         {
             var credentials = new
             {
@@ -32,16 +33,20 @@ namespace RenameLater
             );
             try
             {
-                var def = new { token = "" };
+                
                 var responseString = await response.Content.ReadAsStringAsync();
-                var tokenMsg = JsonConvert.DeserializeAnonymousType(responseString, def);
-                return tokenMsg.token;
+                var loggedUser = JsonConvert.DeserializeObject<LoggedUser>(responseString);
+                return loggedUser;
+            }
+            catch(JsonException)
+            {
+                return null;
             }
             catch (Exception e)
             {
-                return string.Empty;
+                return null;
             }
-
+            
 
         }
     }

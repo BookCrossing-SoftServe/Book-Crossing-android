@@ -9,6 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using RenameLater;
+using RenameLater.services.implementations;
+using RenameLater.services.interfaces;
 using Unity;
 
 namespace Book_Crossing_Android.DependencyInjection
@@ -31,6 +34,9 @@ namespace Book_Crossing_Android.DependencyInjection
         private static void Initialize()
         {
             App.Container = new UnityContainer();
+
+            App.Container.RegisterType<HttpRequests>();
+            App.Container.RegisterType<IAuthenticate, Authenticate>();
 
         }
     }
