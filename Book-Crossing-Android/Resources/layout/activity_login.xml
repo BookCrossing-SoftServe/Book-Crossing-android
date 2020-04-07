@@ -1,58 +1,96 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#2579BF"
-                android:orientation="vertical">
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/rootView"
+              >
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:background="@color/bookrossingPrimary"
+        >
+        <Refractored.Controls.CircleImageView
+android:id="@+id/circleImageView1"
+            android:layout_width="200dp"
+            android:layout_height="180dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/softservelogo"
+            />
+        <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="center"
+             android:textSize="20sp"
+             android:layout_below="@+id/circleImageView1"
+             android:text="Book crossing"
+             android:textColor="#fff"
+             android:layout_alignParentBottom="true"
+             />
+    </RelativeLayout>
+
+
 
   <LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:layout_margin="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_height="0dp"
+    android:layout_width="match_parent"
+    android:layout_weight="0.4"
+  >
+ 
+   <android.support.design.widget.TextInputLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:id="@+id/userName"
+   >
+            <EditText
+android:layout_height="wrap_content"
+android:layout_width="match_parent"
+android:hint="Username"
+android:inputType="textEmailAddress"
+              />
 
-    <TextView
+   </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="SoftServe BookCrossing"
-      android:textColor="@android:color/white"
-      android:gravity="center"
-      android:layout_marginBottom="10dp"
-      android:textStyle="italic"
-    />
-
-    <EditText
-      android:id="@+id/userName"
-      android:layout_width="fill_parent"
-      android:layout_height="45dp"
-      android:padding="5dp"
-      android:hint="email"
-      android:background="@android:color/white" />
-
-    <View
-      android:layout_width="fill_parent"
-      android:layout_height="2dp"
-      android:background="#f7f7f7" />
-
-    <EditText
       android:id="@+id/password"
-      android:layout_width="fill_parent"
-      android:layout_height="45dp"
-      android:padding="5dp"
-      android:hint="password"
-      android:background="@android:color/white"
-      android:inputType="textPassword" />
+    >
+      <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="password"
+        android:inputType="textEmailAddress"
+      />
 
-    <Button
-      android:id="@+id/login"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/password"
-      android:layout_marginTop="10dp"
-      android:background="#307FC1"
-      android:text="Login"
-      android:textColor="@android:color/white" />
+    </android.support.design.widget.TextInputLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/login"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_centerInParent="true"
+                android:text="login"
+                android:textColor="#fff"
+                android:background="@color/bookcrossingAccent"
+
+                />
+
+        </RelativeLayout>
 
   </LinearLayout>
+    
 
-</RelativeLayout>
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
