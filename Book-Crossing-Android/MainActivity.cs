@@ -18,16 +18,12 @@ namespace Book_Crossing_Android
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
     public class MainActivity : AppCompatActivity
     {
-        DrawerLayout drawerLayout;
-        NavigationView navigationView;
+        private DrawerLayout drawerLayout;
+        private NavigationView navigationView;
         private V7Toolbar toolBar;
         private View headerView;
 
-        public MainActivity(IBooksService booksService)
-        {
-
-        }
-
+        
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
