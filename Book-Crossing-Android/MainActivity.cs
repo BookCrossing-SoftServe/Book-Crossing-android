@@ -11,6 +11,7 @@ using Java.Lang;
 
 using Book_Crossing_Android.Activities;
 using Java.IO;
+using RenameLater.services.interfaces;
 using V7Toolbar = Android.Support.V7.Widget.Toolbar;
 namespace Book_Crossing_Android
 {
@@ -19,21 +20,26 @@ namespace Book_Crossing_Android
     {
         DrawerLayout drawerLayout;
         NavigationView navigationView;
+        private V7Toolbar toolBar;
+        private View headerView;
+
+        public MainActivity(IBooksService booksService)
+        {
+
+        }
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.activity_main);
-            var toolbar = FindViewById<V7Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-            SupportActionBar.SetDisplayShowTitleEnabled(false);
-            SupportActionBar.SetHomeButtonEnabled(true);
-            SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.abc_btn_check_material);
-            drawerLayout = FindViewById<Android.Support.V4.Widget.DrawerLayout>(Resource.Id.drawer_layout);
-            navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
-            navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
 
-            var headerView = navigationView.GetHeaderView(0);
+            SetContentView(Resource.Layout.activity_main);
+
+            SetUpSupportActionBar();
+
+            SetUpNavigationView();
+           
+            
+           
 
             var txtUsername = headerView.FindViewById<TextView>(Resource.Id.userNameTextView);
             var stringBuidler = new StringBuilder();
@@ -42,6 +48,24 @@ namespace Book_Crossing_Android
 
             txtUsername.Text = stringBuidler.ToString();
         }
+        private void SetUpNavigationView()
+        {
+            drawerLayout = FindViewById<Android.Support.V4.Widget.DrawerLayout>(Resource.Id.drawer_layout);
+            navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
+            headerView = navigationView.GetHeaderView(0);
+        }
+
+        private void SetUpSupportActionBar()
+        {
+            toolBar = FindViewById<V7Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolBar);
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetDisplayShowTitleEnabled(false);
+            SupportActionBar.SetHomeButtonEnabled(true);
+            SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.abc_btn_check_material);
+        }
+
 
         private void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {

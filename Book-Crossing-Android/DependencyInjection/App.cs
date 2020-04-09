@@ -37,7 +37,7 @@ namespace Book_Crossing_Android.DependencyInjection
 
             App.Container.RegisterType<HttpRequests>();
             App.Container.RegisterType<IAuthenticate, Authenticate>();
-
+            App.Container.RegisterType<IBooksService,BooksService>();
         }
     }
 }
