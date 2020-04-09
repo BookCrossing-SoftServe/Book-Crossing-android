@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <group android:checkableBehavior="single">
+    <item
+     android:icon="@drawable/icon_book"
+      android:id="@+id/nav_books"
+      android:title="Books" />
+    <item
+android:icon="@drawable/icon_request"
+      android:id="@+id/nav_requests"
+      android:title="Requests" />
+    <item
+android:icon="@drawable/icon_message"
+      android:id="@+id/nav_messages_"
+      android:title="Messages" />
+    <item
+      android:id="@+id/nav_FeedBack"
+      android:title="FeedBack" />
+  </group>
+</menu>
