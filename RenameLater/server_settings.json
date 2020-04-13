@@ -1,0 +1,9 @@
+{
+  "urls": {
+    "url": "https://bookcrossingbackend-dev-as.azurewebsites.net/",
+    "login": "https://bookcrossingbackend-dev-as.azurewebsites.net/api/login",
+    "books": "https://bookcrossingbackend-dev-as.azurewebsites.net/api/books",
+    "requests": "https://bookcrossingbackend-dev-as.azurewebsites.net/api/requests"
+  }
+
+}

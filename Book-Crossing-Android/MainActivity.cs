@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Runtime;
@@ -8,32 +9,31 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
-
 using Book_Crossing_Android.Activities;
-using Java.IO;
 using V7Toolbar = Android.Support.V7.Widget.Toolbar;
 namespace Book_Crossing_Android
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
     public class MainActivity : AppCompatActivity
     {
-        DrawerLayout drawerLayout;
-        NavigationView navigationView;
+        private DrawerLayout drawerLayout;
+        private NavigationView navigationView;
+        private V7Toolbar toolBar;
+        private View headerView;
+
+        
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.activity_main);
-            var toolbar = FindViewById<V7Toolbar>(Resource.Id.toolbar);
-            SetSupportActionBar(toolbar);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-            SupportActionBar.SetDisplayShowTitleEnabled(false);
-            SupportActionBar.SetHomeButtonEnabled(true);
-            SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.abc_btn_check_material);
-            drawerLayout = FindViewById<Android.Support.V4.Widget.DrawerLayout>(Resource.Id.drawer_layout);
-            navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
-            navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
 
-            var headerView = navigationView.GetHeaderView(0);
+            SetContentView(Resource.Layout.activity_main);
+
+            SetUpSupportActionBar();
+
+            SetUpNavigationView();
+           
+            
+           
 
             var txtUsername = headerView.FindViewById<TextView>(Resource.Id.userNameTextView);
             var stringBuidler = new StringBuilder();
@@ -42,19 +42,41 @@ namespace Book_Crossing_Android
 
             txtUsername.Text = stringBuidler.ToString();
         }
+        private void SetUpNavigationView()
+        {
+            drawerLayout = FindViewById<Android.Support.V4.Widget.DrawerLayout>(Resource.Id.drawer_layout);
+            navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
+            headerView = navigationView.GetHeaderView(0);
+        }
+
+        private void SetUpSupportActionBar()
+        {
+            toolBar = FindViewById<V7Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolBar);
+            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar.SetDisplayShowTitleEnabled(false);
+            SupportActionBar.SetHomeButtonEnabled(true);
+            SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.abc_btn_check_material);
+        }
+
 
         private void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {
             switch (e.MenuItem.ItemId)
             {
                 case Resource.Id.nav_books:
+                    
                     var trans = SupportFragmentManager.BeginTransaction();
                     trans.Add(Resource.Id.frameLayout1, new BookFragment(), "Fragment1");
                     trans.Commit();
+                    drawerLayout.CloseDrawers();
                     break;
                      
             }
+            
         }
+       
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {

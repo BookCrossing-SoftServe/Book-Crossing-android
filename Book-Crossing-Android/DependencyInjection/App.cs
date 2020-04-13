@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 
 using Android.App;
@@ -9,9 +10,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using RenameLater;
-using RenameLater.services.implementations;
-using RenameLater.services.interfaces;
+using RestApiClient;
+using RestApiClient.services.implementations;
+using RestApiClient.services.interfaces;
 using Unity;
 
 namespace Book_Crossing_Android.DependencyInjection
@@ -35,9 +36,12 @@ namespace Book_Crossing_Android.DependencyInjection
         {
             App.Container = new UnityContainer();
 
-            App.Container.RegisterType<HttpRequests>();
+           
+            App.Container.RegisterType<HttpClient>(TypeLifetime.Singleton);
             App.Container.RegisterType<IAuthenticate, Authenticate>();
-
+            App.Container.RegisterType<IBooksService,BooksService>();
+            App.Container.RegisterType<IRequest, RequestService>();
+            
         }
     }
 }

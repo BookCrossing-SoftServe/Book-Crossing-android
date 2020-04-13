@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 using Newtonsoft.Json;
 
-namespace RenameLater.models.response
+namespace RestApiClient.models.response
 {
     public class LoggedUser
     {

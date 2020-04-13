@@ -53,6 +53,7 @@ android:id="@+id/circleImageView1"
 android:layout_height="wrap_content"
 android:layout_width="match_parent"
 android:hint="Username"
+android:text="vitaliy2001rudenko@gmail.com"
 android:inputType="textEmailAddress"
               />
 
@@ -68,6 +69,7 @@ android:inputType="textEmailAddress"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:hint="password"
+android:text="password"
         android:inputType="textEmailAddress"
       />
 

@@ -64,6 +64,7 @@
     <Compile Include="Activities\BookFragment.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
+    <Compile Include="Adapters\BookAdapter.cs" />
     <Compile Include="DependencyInjection\App.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -107,6 +108,9 @@
     <PackageReference Include="Refractored.Controls.CircleImageView">
       <Version>1.0.1</Version>
     </PackageReference>
+    <PackageReference Include="System.Net.Http">
+      <Version>4.3.4</Version>
+    </PackageReference>
     <PackageReference Include="Unity">
       <Version>5.11.4</Version>
     </PackageReference>
@@ -116,12 +120,18 @@
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
       <Version>28.0.0.3</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.v7.CardView">
+      <Version>28.0.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView">
+      <Version>28.0.0.3</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RenameLater\RenameLater.csproj">
+    <ProjectReference Include="..\RenameLater\RestApiClient.csproj">
       <Project>{f7afa6b7-b1f8-4a38-a10f-8d76ded3b408}</Project>
-      <Name>RenameLater</Name>
+      <Name>RestApiClient</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +175,21 @@
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\RoundedButton.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\BookItem.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\book_photos.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\RoundedButtonSucess.xml" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.
