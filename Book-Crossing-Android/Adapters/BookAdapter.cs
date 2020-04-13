@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -10,67 +10,72 @@ using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using RenameLater.models;
+using Book_Crossing_Android.DependencyInjection;
+using RestApiClient.models;
+using RestApiClient.models.response;
+using RestApiClient.services.interfaces;
+using Unity;
 
 namespace Book_Crossing_Android.Adapters
 {
-    class BookAdapter : BaseAdapter<BookModel>
+   class RecyclerViewHolder : RecyclerView.ViewHolder
+   {
+       public TextView BookNameTextView;
+       public TextView AuthorsTextView;
+       public TextView CategoriesTextView;
+
+       public Button RequestButton;
+       public ProgressBar ProgressBar;
+
+       public RecyclerViewHolder(View ItemView) : base(ItemView)
+       {
+           BookNameTextView = ItemView.FindViewById<TextView>(Resource.Id.bookName);
+           AuthorsTextView = ItemView.FindViewById<TextView>(Resource.Id.bookAuthors);
+           CategoriesTextView = ItemView.FindViewById<TextView>(Resource.Id.Category);
+            RequestButton = ItemView.FindViewById<Button>(Resource.Id.requestButton);
+            ProgressBar = ItemView.FindViewById<ProgressBar>(Resource.Id.requestProgressBar);
+       }
+   }
+
+
+    class RecyclerViewAdapter : RecyclerView.Adapter
     {
-        private List<BookModel> _books;
+        private List<BookModel> _books = new List<BookModel>();
+        public override int ItemCount => _books.Count;
 
-        Context context;
+        private IRequest _requestService;
 
-        public BookAdapter(Context context, List<BookModel> books)
+        public RecyclerViewAdapter(List<BookModel> books)
         {
-            this.context = context;
-            this._books = books;
+            _books = books;
+            _requestService = App.Container.Resolve<IRequest>();
         }
 
-        public override int Count => _books.Count;
-
-        public override BookModel this[int position] => _books[position];
-
-        public override View GetView(int position, View convertView, ViewGroup parent)
+        public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-           
-            View view = convertView;
-            if (view == null)
+            RecyclerViewHolder viewHolder = holder as RecyclerViewHolder;
+            viewHolder.BookNameTextView.Text = _books[position].Name;
+            viewHolder.RequestButton.Click += async (e, s) =>
             {
-                view = LayoutInflater.From(this.context).Inflate(Resource.Layout.BookItem, null, false);
+                viewHolder.ProgressBar.Visibility = ViewStates.Visible;
+                viewHolder.RequestButton.Visibility = ViewStates.Gone;
 
-            }
+                await _requestService.CreateRequestAsync(_books[position].Id, new LoggedUser());
 
-            TextView bookName = view.FindViewById<TextView>(Resource.Id.bookName);
-            TextView authors = view.FindViewById<TextView>(Resource.Id.bookAuthors);
-            TextView categories = view.FindViewById<TextView>(Resource.Id.Category);
+                viewHolder.ProgressBar.Visibility = ViewStates.Gone;
+                viewHolder.RequestButton.Visibility = ViewStates.Visible;
+                viewHolder.RequestButton.Text = "Requested!";
+                viewHolder.RequestButton.SetBackgroundResource(Resource.Drawable.RoundedButtonSucess);
 
-            bookName.Text = _books[position].Name;
-            StringBuilder authorsBuilder = new StringBuilder();
-            foreach (var author in _books[position].Authors)
-            {
-                authorsBuilder.Append(author.FirstName).Append(" ").Append(author.LastName);
-                authorsBuilder.Append(", ");
-            }
-
-            authors.Text = authorsBuilder.ToString();
-            authorsBuilder.Clear();
-            foreach (var category in _books[position].Genres)
-            {
-                authorsBuilder.Append(category.Name).Append(",");
-            }
-
-            categories.Text = authorsBuilder.ToString();
-            authorsBuilder.Clear();
-
-
-            return view;
-
+            };
         }
 
-        public override long GetItemId(int position)
+        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            return position;
-        }
+            LayoutInflater inflater = LayoutInflater.From(parent.Context);
+            View itemView = inflater.Inflate(Resource.Layout.BookItem, parent,false);
+            return new RecyclerViewHolder(itemView);
 
+        }
     }
 }

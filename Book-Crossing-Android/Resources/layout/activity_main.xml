@@ -11,7 +11,7 @@ android:id="@+id/toolbar"
 android:layout_width="match_parent" 
 android:layout_height="wrap_content" 
 android:minHeight="?attr/actionBarSize" 
-android:background="#33B86C" 
+android:background="#4e71ba" 
 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" 
 app:layout_scrollFlags="scroll|enterAlways" /> 
 

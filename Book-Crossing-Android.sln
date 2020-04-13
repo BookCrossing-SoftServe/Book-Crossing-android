@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Book-Crossing-Android", "Book-Crossing-Android\Book-Crossing-Android.csproj", "{4C0F4D76-166D-4150-9DA3-78E64B2B0E10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenameLater", "RenameLater\RenameLater.csproj", "{F7AFA6B7-B1F8-4A38-A10F-8D76DED3B408}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApiClient", "RenameLater\RestApiClient.csproj", "{F7AFA6B7-B1F8-4A38-A10F-8D76DED3B408}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

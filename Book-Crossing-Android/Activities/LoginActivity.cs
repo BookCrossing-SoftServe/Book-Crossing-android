@@ -14,10 +14,10 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Book_Crossing_Android.DependencyInjection;
-using RenameLater.models;
-using RenameLater.models.response;
-using RenameLater.services.implementations;
-using RenameLater.services.interfaces;
+using RestApiClient.models;
+using RestApiClient.models.response;
+using RestApiClient.services.implementations;
+using RestApiClient.services.interfaces;
 using Unity;
 using Xamarin.Essentials;
 

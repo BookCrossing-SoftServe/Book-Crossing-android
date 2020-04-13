@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Runtime;
@@ -8,10 +9,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
-
 using Book_Crossing_Android.Activities;
-using Java.IO;
-using RenameLater.services.interfaces;
 using V7Toolbar = Android.Support.V7.Widget.Toolbar;
 namespace Book_Crossing_Android
 {
@@ -68,13 +66,17 @@ namespace Book_Crossing_Android
             switch (e.MenuItem.ItemId)
             {
                 case Resource.Id.nav_books:
+                    
                     var trans = SupportFragmentManager.BeginTransaction();
                     trans.Add(Resource.Id.frameLayout1, new BookFragment(), "Fragment1");
                     trans.Commit();
+                    drawerLayout.CloseDrawers();
                     break;
                      
             }
+            
         }
+       
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {

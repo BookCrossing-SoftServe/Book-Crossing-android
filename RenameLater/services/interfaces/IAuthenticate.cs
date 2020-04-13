@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using RenameLater.models;
-using RenameLater.models.response;
+﻿using System.Threading.Tasks;
+using RestApiClient.models;
+using RestApiClient.models.response;
 
-namespace RenameLater.services.interfaces
+namespace RestApiClient.services.interfaces
 {
     public interface IAuthenticate
     { 

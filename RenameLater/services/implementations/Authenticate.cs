@@ -1,30 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Net.Http;
 using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
-using RenameLater.models;
-using RenameLater.models.response;
-using RenameLater.services.interfaces;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using RestApiClient.models;
+using RestApiClient.models.response;
+using RestApiClient.services.interfaces;
 
-namespace RenameLater.services.implementations
+namespace RestApiClient.services.implementations
 {
     public class Authenticate : IAuthenticate
     {
-        private readonly HttpRequests _httpRequests;
+        private readonly HttpClient _httpClient;
+        
         public async Task<LoggedUser> VerifyCredentialsAsync(LoginModel loginModel)
         {
-            var token = await _httpRequests.GetToken(loginModel);
-            if (token==null)
+            var credentialsEncoded = JsonConvert.SerializeObject(loginModel);
+
+            var httpContent = new StringContent(credentialsEncoded, Encoding.UTF8, "application/json");
+
+           
+
+
+            var httpResponse = await _httpClient.PostAsync(
+                    String.Concat(ServerConfiguration.Url, ServerConfiguration.Login),
+                    httpContent);
+
+            var loggedUser = JsonConvert.DeserializeObject<LoggedUser>(await httpResponse.Content.ReadAsStringAsync());
+
+            if (loggedUser == null)
             {
                 throw new InvalidCredentialException();
             }
-            return token;
+            _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + loggedUser.Token);
+            return loggedUser;
+
+
         }
 
-        public Authenticate(HttpRequests httpRequests)
+
+
+
+        public Authenticate(HttpClient httpClient)
         {
-            this._httpRequests = httpRequests;
+            this._httpClient = httpClient;
+         
         }
     }
 }
